@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queries.Ai", "Queries.Ai.csproj", "{6E512419-3D8F-46FA-AC36-8932B6B3BC0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queries.Ai.Tests", "..\Querys.Ai.Tests\Queries.Ai.Tests.csproj", "{55E31FE9-A501-4EB1-B769-400CBDC0B9BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E512419-3D8F-46FA-AC36-8932B6B3BC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E512419-3D8F-46FA-AC36-8932B6B3BC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E512419-3D8F-46FA-AC36-8932B6B3BC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E512419-3D8F-46FA-AC36-8932B6B3BC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55E31FE9-A501-4EB1-B769-400CBDC0B9BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55E31FE9-A501-4EB1-B769-400CBDC0B9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55E31FE9-A501-4EB1-B769-400CBDC0B9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55E31FE9-A501-4EB1-B769-400CBDC0B9BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {458DC530-DE66-4037-A537-B87EBC4E8ECA}
+	EndGlobalSection
+EndGlobal
