@@ -14,7 +14,16 @@ public class QueryExecutor<T>
         IQueryable<T> QueryResult = DataCollection;
 
         if (Predicates.WherePredicate != null) QueryResult = DataCollection.AsQueryable().Where(Predicates.WherePredicate).AsQueryable();
-        if (Predicates.SelectPredicate != null) QueryResult = (IQueryable<T>)DataCollection.Select(Predicates.SelectPredicate);
+        if (Predicates.SelectPredicate != null)
+        {
+            try
+            {
+                QueryResult = (IQueryable<T>)DataCollection.Select(Predicates.SelectPredicate);
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
         if (Predicates.OrderByPredicate != null) QueryResult = DataCollection.OrderBy(Predicates.OrderByPredicate).AsQueryable();
         if (Predicates.OrderByDescendingPredicate != null) QueryResult = DataCollection.OrderByDescending(Predicates.OrderByDescendingPredicate).AsQueryable();
 

@@ -1,4 +1,5 @@
-﻿using System.Linq.Dynamic.Core;
+﻿using System;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Reflection;
 using OpenAI.API;
@@ -28,7 +29,7 @@ public class QueryPrompt: IQueryPrompt
         access to the API. */
         OpenAIAPI openai = new OpenAIAPI(new APIAuthentication(API_KEY));
 
-        Type[] Types = GetTypes(DataCollection);
+        List<Type> Types = GetTypes(DataCollection);
         /* This code is using the OpenAI API to generate a completion for a given prompt. The `openai`
         object is an instance of the `OpenAIAPI` class, which is used to interact with the OpenAI
         API. The `Completions` property of the `openai` object is used to create a new completion
@@ -45,7 +46,22 @@ public class QueryPrompt: IQueryPrompt
                 //stopSequences: new string[] { "\n" }
                 )
             );
+
         string LinqQuery = response.Completions[0].Text.Trim();
+
+        //var response2 = await openai.Completions.CreateCompletionAsync(
+        //    new CompletionRequest(
+        //        prompt: $"If the LINQ expression \"{LinqQuery}\" is a projection. Return the projected properties as an array ignoring the 'p' parameter and always inside a [] structure. and answer 'no' if the LINQ expression \"{LinqQuery}\"  it is not a projection",
+        //        //prompt: $"Given the following LINQ expression \"{LinqQuery}\" just respond, return the properties projected as an array [] , or only answer 'no' if it is not a projection",
+        //        model: Model.DavinciText,
+        //        max_tokens: 60,
+        //        temperature: 0.1,
+        //        numOutputs: 1
+        //        //stopSequences: "\n"
+        //        )
+        //    );
+
+        //string Proyection = response2.Completions[0].Text.Trim();
 
         LinqQueryResultDTO Dto = new LinqQueryParser().ParseLinqQuery( LinqQuery );
 
@@ -75,13 +91,13 @@ public class QueryPrompt: IQueryPrompt
         return datalist;
     }
 
-    private Type[] GetTypes<T>(IQueryable<T> collection)
+    private List<Type> GetTypes<T>(IQueryable<T> collection)
     {
         PropertyInfo[] properties = typeof(T).GetProperties();
-        Type[] types = new Type[properties.Length];
+        List<Type> types = new List<Type>();
         for (int i = 0; i < properties.Length; i++)
         {
-            types[i] = properties[i].PropertyType.GetTypeInfo();
+            types.Add(properties[i].PropertyType.GetTypeInfo());
         }
         return types;
     }

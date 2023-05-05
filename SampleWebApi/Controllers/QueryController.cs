@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OpenAI.API.Completions;
+using Queries.Ai.Utils;
 using SampleWebApi.Models;
 using System.Linq.Dynamic.Core;
 
@@ -60,6 +61,10 @@ namespace SampleWebApi.Controllers
 
             var querysimple = PersonCollection.Where(p => p.Name != "Alfredo" && p.Birthday >= new DateTime(1999, 1, 1) && p.Birthday <= new DateTime(2020, 12, 31)).Distinct();
 
+            var parser = new LinqQueryParser();
+            var query = "PersonCollection.Select(x => new { Name = x.Name, Age = x.Age })";
+            var result = parser.ParseLinqQuery(query);
+            var projectionLambda = result.SelectLambda;
 
             //var querysimple = PersonCollection.Where(x => x.Name != "Alfredo").Select(x => x.Name).Distinct(); 
 
