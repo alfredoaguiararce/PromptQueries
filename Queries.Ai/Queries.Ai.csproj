@@ -4,7 +4,32 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>PromptQueries</Title>
+    <Authors>Alfredo Aguiar Arce</Authors>
+    <Company>Alfredo Aguiar Arce</Company>
+    <Product>PromptQueries</Product>
+    <Description>PromptQueries is a C# library that provides an easy way to execute complex queries on collections of objects using OpenAI's GPT-3 language model. With this library, you can query your collections using natural language queries and get accurate and relevant results.</Description>
+    <PackageProjectUrl>https://github.com/alfredoaguiararce/PromptQueries</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/alfredoaguiararce/PromptQueries</RepositoryUrl>
+    <PackageTags>chatgpt; gpt; openai; open ai; LINQ; collections;</PackageTags>
+    <PackageReleaseNotes>1.0.0
+Added support for querying entities based on natural language prompts.
+Included API endpoint for making queries using HTTP GET requests.
+Added support for dependency injection.
+Included example projects for usage with and without dependency injection.
+Added detailed documentation and a README file for easy project setup.</PackageReleaseNotes>
+    <Version>1.0.0</Version>
+    <PackageId>PromptQueries</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
