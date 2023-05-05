@@ -9,7 +9,6 @@ PromptQueries is a C# library that provides an easy way to execute complex queri
 To use PromptQueries in your .NET project, you can install it from NuGet. Just run the following command in your NuGet package manager console:
 
 ```
-mathematicaCopy code
 Install-Package PromptQueries
 ```
 
@@ -20,7 +19,6 @@ Install-Package PromptQueries
 Before you can use PromptQueries to execute queries, you need to authenticate your OpenAI API key. You can do this by calling the **`AddOpenAiAuth`** method when configuring your application's services:
 
 ```
-csharpCopy code
 using Queries.Ai;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -35,7 +33,6 @@ services.AddOpenAiAuth("<your OpenAI API key>");
 To execute a query, you need to call the **`RunQuery`** method of the **`IQueryPrompt`** interface. Here's an example:
 
 ```
-csharpCopy code
 using Queries.Ai.Utils;
 
 // ...
