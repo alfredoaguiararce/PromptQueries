@@ -301,7 +301,8 @@ obj/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -617,5 +618,6 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore,aspnetcore,visualstudio,visualstudiocode,windows,macos,linux
 SampleWebApi/appsettings.json
-Querys.Ai.Tests/appsettings.json
 SampleWebApi/appsettings.Development.json
+Querys.Ai.Tests/appsettings.json
+Queries.Ai.Tests/appsettings.json
