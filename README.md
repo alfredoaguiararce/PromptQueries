@@ -70,4 +70,4 @@ PromptQueries is licensed under the MIT License.
 
 If you find PromptQueries useful, consider supporting the project by making a donation via PayPal:
 
-![https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif](https://www.paypal.com/donate/?hosted_button_id=Z6KKYZKYY25CW)
+[Support in Paypal ♥️ ](https://www.paypal.com/donate/?hosted_button_id=Z6KKYZKYY25CW)
