@@ -1,3 +1,6 @@
+using Microsoft.Extensions.Configuration;
+using Queries.Ai.Utils;
+
 [TestFixture]
 public class QueryPromptTests
 {
@@ -6,7 +9,12 @@ public class QueryPromptTests
     [SetUp]
     public void Setup()
     {
-        queryPrompt = new QueryPrompt("");
+        IConfiguration configuration = new ConfigurationBuilder()
+            //.SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        queryPrompt = new QueryPrompt(configuration.GetSection("OPEN_AI_KEY").Value);
     }
 
     [Test]
