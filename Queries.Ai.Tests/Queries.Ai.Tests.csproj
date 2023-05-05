@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Querya.Ai\Queries.Ai.csproj" />
+    <ProjectReference Include="..\Queries.Ai\Queries.Ai.csproj" />
   </ItemGroup>
 
 </Project>
