@@ -4,6 +4,9 @@ public class LinqQueryResultDTO
 {
     public string? WhereLambda { get; set; }
     public string? SelectLambda { get; set; }
+
+    public string? ProjectionLamda { get; set; }
+
     public string? OrderByLambda { get; set; }
     public string? OrderByDescendingLambda { get; set; }
     public string? ThenByLambda { get; set; }

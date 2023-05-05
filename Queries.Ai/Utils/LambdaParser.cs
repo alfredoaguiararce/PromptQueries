@@ -14,7 +14,18 @@ public class LambdaParser<T>
         LambdaExpresionsDto<T> Result = new LambdaExpresionsDto<T>();
 
         if (dto.WhereLambda != null) Result.ExcecutableWhereLambda = GetExecutableExpression<T, bool>(dto.WhereLambda);
-        if (dto.SelectLambda != null) Result.ExcecutableSelectLambda = GetExecutableExpression<T, object>(dto.SelectLambda);
+        if (dto.SelectLambda != null) 
+        {
+            try
+            {
+                Result.ExcecutableSelectLambda = GetExecutableExpression<T, object>(dto.SelectLambda);
+            }catch (Exception ex)
+            {
+                //GetExecutableExpresions<T, T>(dto.SelectLambda);
+            }
+            
+
+        }
         if (dto.OrderByLambda != null) Result.ExcecutableOrderByLambda = GetExecutableExpression<T, object>(dto.OrderByLambda);
         if (dto.OrderByDescendingLambda != null) Result.ExcecutableOrderByDescendingLambda = GetExecutableExpression<T, object>(dto.OrderByDescendingLambda);
         if (dto.ThenByLambda != null) Result.ExcecutableThenByLambda = GetExecutableExpression<T, object>(dto.ThenByLambda);
@@ -22,8 +33,8 @@ public class LambdaParser<T>
         if (dto.SkipLambda != null) Result.ExcecutableSkipLambda = GetExecutableInt<T>(dto.SkipLambda);
         if (dto.TakeLambda != null) Result.ExcecutableTakeLambda = GetExecutableInt<T>(dto.TakeLambda);
         if (dto.AverageLambda != null) Result.ExcecutableAverageLambda = GetExecutableExpression<T, decimal>(dto.AverageLambda);
-        if (!String.IsNullOrEmpty(dto.DistinctLambda)) Result.ExcecutableDistinctLambda = true;
-        if (!String.IsNullOrEmpty(dto.ReverseLambda)) Result.ExcecutableReverseLambda = true;
+        if (dto.DistinctLambda != null) Result.ExcecutableDistinctLambda = true;
+        if (dto.ReverseLambda != null) Result.ExcecutableReverseLambda = true;
 
         return Result;
     }
@@ -39,4 +50,5 @@ public class LambdaParser<T>
         Expression<Func<int>>? Result = DynamicExpressionParser.ParseLambda<int>(new ParsingConfig(), true, expression: Expression);
         return Result;
     }
+
 }

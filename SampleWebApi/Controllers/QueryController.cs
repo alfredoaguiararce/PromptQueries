@@ -18,7 +18,7 @@ namespace SampleWebApi.Controllers
         }
 
         [HttpGet(Name = "GetQuery/{prompt}")]
-        public async Task<IQueryable<Person>> Get(string prompt)
+        public async Task<dynamic?> Get(string prompt)
         {
             IQueryable<Person> PersonCollection = new List<Person>
             {

@@ -22,7 +22,8 @@ public class LinqQueryParser
                 LinqMethods.Skip,
                 LinqMethods.Take,
                 LinqMethods.Distinct,
-                LinqMethods.Reverse
+                LinqMethods.Reverse,
+                LinqMethods.Average
             };
 
         // Loop over each of the methods in our array
@@ -77,6 +78,7 @@ public class LinqQueryParser
             // Extract the lambda expression that's enclosed in the brackets
             var lambdaExpression = remainingSubstring.Substring(1, i - 2);
 
+            bool foundOrderByDescending = false;
             // Store the lambda expression in the appropriate property of the result object
             switch (method)
             {
@@ -89,11 +91,18 @@ public class LinqQueryParser
                     break;
 
                 case LinqMethods.OrderBy:
-                    result.OrderByLambda = lambdaExpression;
+                    if (!foundOrderByDescending)
+                    {
+                        result.OrderByLambda = lambdaExpression;
+                    }
                     break;
 
                 case LinqMethods.OrderByDescending:
-                    result.OrderByDescendingLambda = lambdaExpression;
+                    if (!foundOrderByDescending)
+                    {
+                        result.OrderByDescendingLambda = lambdaExpression;
+                        foundOrderByDescending = true;
+                    }
                     break;
 
                 case LinqMethods.ThenBy:

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq.Dynamic.Core;
-using System.Linq.Expressions;
-using System.Reflection;
+﻿using System.Reflection;
 using OpenAI.API;
 using OpenAI.API.Completions;
 using OpenAI.API.Models;
@@ -20,7 +17,7 @@ public class QueryPrompt: IQueryPrompt
     }
 
 
-    public async Task<IQueryable<T>> RunQuery<T>(IQueryable<T> DataCollection, string Prompt)
+    public async Task<dynamic>? RunQuery<T>(IQueryable<T> DataCollection, string Prompt)
     {
         
         /* `OpenAIAPI openai = new OpenAIAPI(API_KEY);` is creating a new instance of the `OpenAIAPI`
@@ -34,7 +31,7 @@ public class QueryPrompt: IQueryPrompt
         object is an instance of the `OpenAIAPI` class, which is used to interact with the OpenAI
         API. The `Completions` property of the `openai` object is used to create a new completion
         request using the `CreateCompletionAsync` method. */
-        string prompt = $"Generate LINQ query as a lambda expression in c# over IQueryable<{DataCollection.GetType()}> {GetCollectionText(DataCollection)} parameter for {Prompt}. Return only the lambda expression over the DataCollection parameter.";
+        string prompt = $"Generate LINQ query as a lambda expression in c# over IQueryable<{DataCollection.GetType()}> {GetCollectionText(DataCollection)} parameter for {Prompt} using LINQ. Return only the lambda expression over the DataCollection parameter.";
 
         var response = await openai.Completions.CreateCompletionAsync(
             new CompletionRequest(
@@ -49,27 +46,13 @@ public class QueryPrompt: IQueryPrompt
 
         string LinqQuery = response.Completions[0].Text.Trim();
 
-        //var response2 = await openai.Completions.CreateCompletionAsync(
-        //    new CompletionRequest(
-        //        prompt: $"If the LINQ expression \"{LinqQuery}\" is a projection. Return the projected properties as an array ignoring the 'p' parameter and always inside a [] structure. and answer 'no' if the LINQ expression \"{LinqQuery}\"  it is not a projection",
-        //        //prompt: $"Given the following LINQ expression \"{LinqQuery}\" just respond, return the properties projected as an array [] , or only answer 'no' if it is not a projection",
-        //        model: Model.DavinciText,
-        //        max_tokens: 60,
-        //        temperature: 0.1,
-        //        numOutputs: 1
-        //        //stopSequences: "\n"
-        //        )
-        //    );
-
-        //string Proyection = response2.Completions[0].Text.Trim();
-
         LinqQueryResultDTO Dto = new LinqQueryParser().ParseLinqQuery( LinqQuery );
 
         LambdaExpresionsDto<T> lambdaExpresionsDto = new LambdaParser<T>().GetExecutableExpresions<T>(Dto);
 
         PredicatesDto<T> CompilatePredicates = new PredicatedCompilator<T>().Compile<T>(lambdaExpresionsDto);
 
-        IQueryable<T> QueryResult = new QueryExecutor<T>().RunQueries(DataCollection, CompilatePredicates);
+        dynamic QueryResult = new QueryExecutor<T>().RunQueries(DataCollection, CompilatePredicates);
 
         return QueryResult;
     }
